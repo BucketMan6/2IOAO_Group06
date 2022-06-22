@@ -1857,8 +1857,40 @@ Blockly.createMainWorkspace_ = function (a, b) {
 Blockly.init_ = function (a) {
     var b = a.options; Blockly.bindEvent_(a.options.svg, "contextmenu", null, function (a) { Blockly.isTargetInput_(a) || a.preventDefault() }); Blockly.bindEvent_(window, "resize", null, function () { Blockly.svgResize(a) }); Blockly.documentEventsBound_ || (Blockly.bindEvent_(document, "keydown", null, Blockly.onKeyDown_), Blockly.bindEvent_(document, "touchend", null, Blockly.longStop_), Blockly.bindEvent_(document, "touchcancel", null, Blockly.longStop_), document.addEventListener("mouseup", Blockly.onMouseUp_,
         !1), goog.userAgent.IPAD && Blockly.bindEvent_(window, "orientationchange", document, function () { Blockly.fireUiEvent(window, "resize") }), Blockly.documentEventsBound_ = !0); if (b.languageTree) if (a.toolbox_) a.toolbox_.init(a); else if (a.flyout_) { a.flyout_.init(a); a.flyout_.show(b.languageTree.childNodes); a.scrollX = a.flyout_.width_; b.RTL && (a.scrollX *= -1); var c = "translate(" + a.scrollX + ", 0)"; a.getCanvas().setAttribute("transform", c); a.getBubbleCanvas().setAttribute("transform", c) } b.hasScrollbars && (a.scrollbar = new Blockly.ScrollbarPair(a),
-            a.scrollbar.resize()); if (b.hasSounds) { a.loadAudio_([b.pathToMedia + "click.mp3", b.pathToMedia + "click.wav", b.pathToMedia + "click.ogg"], "click"); a.loadAudio_([b.pathToMedia + "delete.mp3", b.pathToMedia + "delete.ogg", b.pathToMedia + "delete.wav"], "delete"); var d = [], b = function () { for (; d.length;)Blockly.unbindEvent_(d.pop()); a.preloadAudio_() }; d.push(Blockly.bindEvent_(document, "mousemove", null, b)); d.push(Blockly.bindEvent_(document, "touchstart", null, b)) }
-};
+            a.scrollbar.resize());
+            if(b.hasSounds){
+                a.loadAudio_([b.pathToMedia+"click.mp3",b.pathToMedia+"click.wav",b.pathToMedia+"click.ogg"],"click");
+                a.loadAudio_([b.pathToMedia+"delete.mp3",b.pathToMedia+"delete.ogg",b.pathToMedia+"delete.wav"],"delete");
+                //***************************
+                a.loadAudio_([b.pathToMedia+"delay.mp3",b.pathToMedia+"delay.ogg",b.pathToMedia+"delay.wav"],"delay")
+                a.loadAudio_([b.pathToMedia+"high.mp3",b.pathToMedia+"high.ogg",b.pathToMedia+"high.wav"],"high")
+                a.loadAudio_([b.pathToMedia+"low.mp3",b.pathToMedia+"low.ogg",b.pathToMedia+"low.wav"],"low")
+                a.loadAudio_([b.pathToMedia+"if.mp3",b.pathToMedia+"if.ogg",b.pathToMedia+"if.wav"],"if")
+                a.loadAudio_([b.pathToMedia+"else.mp3",b.pathToMedia+"else.ogg",b.pathToMedia+"else.wav"],"else")
+                a.loadAudio_([b.pathToMedia+"compare.mp3",b.pathToMedia+"compare.ogg",b.pathToMedia+"compare.wav"],"compare")
+                a.loadAudio_([b.pathToMedia+"print.mp3",b.pathToMedia+"print.ogg",b.pathToMedia+"print.wav"],"print")
+
+                //***********************************
+                var d=[],b=function(){
+                for(;d.length;)Blockly.unbindEvent_(d.pop());
+                a.preloadAudio_()};
+
+                d.push(Blockly.bindEvent_(document,"mousemove",null,b));
+                d.push(Blockly.bindEvent_(document,"touchstart",null,b))}};
+            
+            //**************************************
+            //add sound effects 4 some blocks
+            Blockly.BlockSvg.prototype.sound_delay = function () {this.workspace.playAudio("delay")};
+            Blockly.BlockSvg.prototype.sound_high = function () {this.workspace.playAudio("high")};
+            Blockly.BlockSvg.prototype.sound_low = function () {this.workspace.playAudio("low")};
+            Blockly.BlockSvg.prototype.sound_if = function () {this.workspace.playAudio("if")};
+            Blockly.BlockSvg.prototype.sound_else = function () {this.workspace.playAudio("else")};
+            Blockly.BlockSvg.prototype.sound_compare = function () {this.workspace.playAudio("compare")};
+            Blockly.BlockSvg.prototype.sound_print = function () {this.workspace.playAudio("print")};
+
+            
+            //****************************** 	
+            
 Blockly.updateToolbox = function (a) { console.warn("Deprecated call to Blockly.updateToolbox, use workspace.updateToolbox instead."); Blockly.getMainWorkspace().updateToolbox(a) }; Blockly.utils = {}; Blockly.addClass_ = function (a, b) { var c = a.getAttribute("class") || ""; -1 == (" " + c + " ").indexOf(" " + b + " ") && (c && (c += " "), a.setAttribute("class", c + b)) }; Blockly.removeClass_ = function (a, b) { var c = a.getAttribute("class"); if (-1 != (" " + c + " ").indexOf(" " + b + " ")) { for (var c = c.split(/\s+/), d = 0; d < c.length; d++)c[d] && c[d] != b || (c.splice(d, 1), d--); c.length ? a.setAttribute("class", c.join(" ")) : a.removeAttribute("class") } };
 Blockly.hasClass_ = function (a, b) { return -1 != (" " + a.getAttribute("class") + " ").indexOf(" " + b + " ") }; Blockly.bindEvent_ = function (a, b, c, d) { var e = c ? function (a) { d.call(c, a) } : d; a.addEventListener(b, e, !1); var f = [[a, b, e]]; if (b in Blockly.bindEvent_.TOUCH_MAP) for (var e = function (a) { if (1 == a.changedTouches.length) { var b = a.changedTouches[0]; a.clientX = b.clientX; a.clientY = b.clientY } d.call(c, a); a.preventDefault() }, g = 0, h; h = Blockly.bindEvent_.TOUCH_MAP[b][g]; g++)a.addEventListener(h, e, !1), f.push([a, h, e]); return f };
 Blockly.bindEvent_.TOUCH_MAP = {}; goog.events.BrowserFeature.TOUCH_ENABLED && (Blockly.bindEvent_.TOUCH_MAP = { mousedown: ["touchstart"], mousemove: ["touchmove"], mouseup: ["touchend", "touchcancel"] }); Blockly.unbindEvent_ = function (a) { for (; a.length;) { var b = a.pop(), c = b[2]; b[0].removeEventListener(b[1], c, !1) } return c };
