@@ -33,7 +33,7 @@ Blockly.Blocks.base = {}; Blockly.Blocks.base_delay = {
   } 
 };
 
-  Blockly.Blocks.base_map = { helpUrl: "http://arduino.cc/en/Reference/map", init: function () { this.setColour(230); this.appendValueInput("NUM", "Number").appendField("Map ").setCheck("Number"); this.appendValueInput("DMAX", "Number").appendField("value \u21E8 [0-").setCheck("Number"); this.appendDummyInput().appendField("]"); this.setInputsInline(!0); this.setOutput(!0); this.setTooltip("Re-maps a number from [0-1024] to another.") } };
+Blockly.Blocks.base_map = { helpUrl: "http://arduino.cc/en/Reference/map", init: function () { this.setColour(230); this.appendValueInput("NUM", "Number").appendField("Map ").setCheck("Number"); this.appendValueInput("DMAX", "Number").appendField("value \u21E8 [0-").setCheck("Number"); this.appendDummyInput().appendField("]"); this.setInputsInline(!0); this.setOutput(!0); this.setTooltip("Re-maps a number from [0-1024] to another.") } };
 Blockly.Blocks.inout_buildin_led = { helpUrl: "http://arduino.cc/en/Reference/DigitalWrite", init: function () { this.setColour(190); this.appendDummyInput().appendField("Build-in LED Stat \uD83D\uDCA1").appendField(new Blockly.FieldDropdown([["HIGH \uD83D\uDC46", "HIGH"], ["LOW \uD83D\uDC47", "LOW"]]), "STAT"); this.setPreviousStatement(!0, null); this.setNextStatement(!0, null); this.setTooltip("light or off the build-in LED") } };
 Blockly.Blocks.inout_digital_write = { helpUrl: "http://arduino.cc/en/Reference/DigitalWrite", init: function () { this.setColour(230); this.appendDummyInput().appendField("\u270D \u21A8 DigitalWrite PIN#").appendField(new Blockly.FieldDropdown(profile["default"].digital), "PIN").appendField("Stat").appendField(new Blockly.FieldDropdown([["HIGH \uD83D\uDC46", "HIGH"], ["LOW \uD83D\uDC47", "LOW"]]), "STAT"); this.setPreviousStatement(!0, null); this.setNextStatement(!0, null); this.setTooltip("Write digital value to a specific Port") } };
 Blockly.Blocks.inout_digital_read = { helpUrl: "http://arduino.cc/en/Reference/DigitalRead", init: function () { this.setColour(230); this.appendDummyInput().appendField("\uD83D\uDC40 \u21A8 DigitalRead PIN#").appendField(new Blockly.FieldDropdown(profile["default"].digital), "PIN"); this.setOutput(!0, "Boolean"); this.setTooltip("") } };
@@ -223,7 +223,6 @@ Blockly.Blocks.controls_if = {
     this.appendStatementInput("DO0").appendField(Blockly.Msg.CONTROLS_IF_MSG_THEN); 
     this.setPreviousStatement(!0); this.setNextStatement(!0); 
     this.setMutator(new Blockly.Mutator(["controls_if_elseif", "controls_if_else"])); var a = this; 
-    //this.sound_if();
     this.setTooltip(function () {
       if (a.elseifCount_ || a.elseCount_) {
         if (!a.elseifCount_ &&
@@ -286,7 +285,6 @@ Blockly.Blocks.controls_if_else = {
     this.setOutput(!0, "Boolean"); this.appendValueInput("A"); 
     this.appendValueInput("B").appendField(new Blockly.FieldDropdown(a), "OP"); 
     this.setInputsInline(!0); var b = this; 
-    this.sound_compare();
     this.setTooltip(function () {
       var a =
         b.getFieldValue("OP"); return { EQ: Blockly.Msg.LOGIC_COMPARE_TOOLTIP_EQ, NEQ: Blockly.Msg.LOGIC_COMPARE_TOOLTIP_NEQ, LT: Blockly.Msg.LOGIC_COMPARE_TOOLTIP_LT, LTE: Blockly.Msg.LOGIC_COMPARE_TOOLTIP_LTE, GT: Blockly.Msg.LOGIC_COMPARE_TOOLTIP_GT, GTE: Blockly.Msg.LOGIC_COMPARE_TOOLTIP_GTE }[a]
@@ -298,7 +296,7 @@ Blockly.Blocks.controls_if_else = {
     } this.prevBlocks_[0] = a; 
     this.prevBlocks_[1] = b
   },mutationToDom: function(){
-    this.sound_compare();
+    this.sound_logic_compare();
     return null
   }
   

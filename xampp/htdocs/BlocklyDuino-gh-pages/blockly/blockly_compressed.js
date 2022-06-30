@@ -1862,13 +1862,53 @@ Blockly.init_ = function (a) {
                 a.loadAudio_([b.pathToMedia+"click.mp3",b.pathToMedia+"click.wav",b.pathToMedia+"click.ogg"],"click");
                 a.loadAudio_([b.pathToMedia+"delete.mp3",b.pathToMedia+"delete.ogg",b.pathToMedia+"delete.wav"],"delete");
                 //***************************
-                a.loadAudio_([b.pathToMedia+"delay.mp3",b.pathToMedia+"delay.ogg",b.pathToMedia+"delay.wav"],"delay")
-                a.loadAudio_([b.pathToMedia+"high.mp3",b.pathToMedia+"high.ogg",b.pathToMedia+"high.wav"],"high")
-                a.loadAudio_([b.pathToMedia+"low.mp3",b.pathToMedia+"low.ogg",b.pathToMedia+"low.wav"],"low")
+
+                
+                a.loadAudio_([b.pathToMedia+"logic category.mp3",b.pathToMedia+"logic category.ogg",b.pathToMedia+"logic category.wav"],"logic_category")
                 a.loadAudio_([b.pathToMedia+"if.mp3",b.pathToMedia+"if.ogg",b.pathToMedia+"if.wav"],"if")
                 a.loadAudio_([b.pathToMedia+"else.mp3",b.pathToMedia+"else.ogg",b.pathToMedia+"else.wav"],"else")
                 a.loadAudio_([b.pathToMedia+"compare.mp3",b.pathToMedia+"compare.ogg",b.pathToMedia+"compare.wav"],"compare")
+                a.loadAudio_([b.pathToMedia+"logic compare.mp3",b.pathToMedia+"compare.ogg",b.pathToMedia+"compare.wav"], "logic_compare")
+                //NOT
+                //NULL
+
+                a.loadAudio_([b.pathToMedia+"control category.mp3",b.pathToMedia+"control category.ogg",b.pathToMedia+"control category.wav"],"control_category")
+                a.loadAudio_([b.pathToMedia+"delay.mp3",b.pathToMedia+"delay.ogg",b.pathToMedia+"delay.wav"],"delay")
+                //COUNTING LOOP
+                //REPEAT LOOP
+
+                a.loadAudio_([b.pathToMedia+"math category.mp3",b.pathToMedia+"math category.ogg",b.pathToMedia+"math category.wav"],"math_category")
+                //NUMBER
+                //MATH OPERATION
+                //MAP VALUE
+
+                //TEXT
+
+                a.loadAudio_([b.pathToMedia+"variables category.mp3",b.pathToMedia+"variables category.ogg",b.pathToMedia+"variables category.wav"],"variables_category")
+                //SET VARIABLE
+                
+                //CATEGORY: FUNCTIONS
+
+                //CATEGORY: INPUT/OUTPUT
+                a.loadAudio_([b.pathToMedia+"high.mp3",b.pathToMedia+"high.ogg",b.pathToMedia+"high.wav"],"high")
+                a.loadAudio_([b.pathToMedia+"low.mp3",b.pathToMedia+"low.ogg",b.pathToMedia+"low.wav"],"low")
+                //DIGITAL WRITE
+                //DIGITAL READ
+                //ANALOG WRITE
+                //ANALOG READ
                 a.loadAudio_([b.pathToMedia+"print.mp3",b.pathToMedia+"print.ogg",b.pathToMedia+"print.wav"],"print")
+                //TONE PIN FREQUENCY
+                //NO TONE PIN
+                //BUILT IN LED
+
+                //CATEGORY: GROVE
+                //LED
+                //BUTTON
+                //DIGITAL RELAY
+                //DIGITAL TILT SWITCH
+                //PEIZO BUZZER
+                //MOTION SENSOR
+
 
                 //***********************************
                 var d=[],b=function(){
@@ -1879,14 +1919,58 @@ Blockly.init_ = function (a) {
                 d.push(Blockly.bindEvent_(document,"touchstart",null,b))}};
             
             //**************************************
-            //add sound effects 4 some blocks
-            Blockly.BlockSvg.prototype.sound_delay = function () {this.workspace.playAudio("delay")};
-            Blockly.BlockSvg.prototype.sound_high = function () {this.workspace.playAudio("high")};
-            Blockly.BlockSvg.prototype.sound_low = function () {this.workspace.playAudio("low")};
+            //add sound effects for some blocks
+            
+            //LOGIC CATEGORY AND BLOCKS
+            Blockly.BlockSvg.prototype.sound_if = function () {this.workspace.playAudio("logic_category")};
             Blockly.BlockSvg.prototype.sound_if = function () {this.workspace.playAudio("if")};
             Blockly.BlockSvg.prototype.sound_else = function () {this.workspace.playAudio("else")};
             Blockly.BlockSvg.prototype.sound_compare = function () {this.workspace.playAudio("compare")};
+            Blockly.BlockSvg.prototype.sound_logic_compare = function () {this.workspace.playAudio("logic_compare")};
+            //NOT
+            //NULL
+
+            //CONTROL CATEGORY
+            Blockly.BlockSvg.prototype.sound_delay = function () {this.workspace.playAudio("control_category")};
+            Blockly.BlockSvg.prototype.sound_delay = function () {this.workspace.playAudio("delay")};
+            //COUNTING LOOP
+            //REPEAT LOOP
+
+            Blockly.BlockSvg.prototype.sound_if = function () {this.workspace.playAudio("math_category")};
+            //NUMBER
+            //MATH OPERATION
+            //MAP VALUE
+
+            //TEXT
+
+            //CATEGORY: VARIABLES
+            //SET VARIABLE
+            
+            //CATEGORY: FUNCTIONS
+
+            //CATEGORY: INPUT/OUTPUT
+            Blockly.BlockSvg.prototype.sound_high = function () {this.workspace.playAudio("high")};
+            Blockly.BlockSvg.prototype.sound_low = function () {this.workspace.playAudio("low")};
+            //DIGITAL WRITE
+            //DIGITAL READ
+            //ANALOG WRITE
+            //ANALOG READ
             Blockly.BlockSvg.prototype.sound_print = function () {this.workspace.playAudio("print")};
+            //TONE PIN FREQUENCY
+            //NO TONE PIN
+            //BUILT IN LED
+
+            //CATEGORY: GROVE
+            //LED
+            //BUTTON
+            //DIGITAL RELAY
+            //DIGITAL TILT SWITCH
+            //PEIZO BUZZER
+            //MOTION SENSOR
+
+
+            
+
 
             
             //****************************** 	
