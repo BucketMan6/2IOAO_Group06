@@ -25,8 +25,8 @@ Blockly.Blocks.base = {}; Blockly.Blocks.base_delay = {
   function () { this.setColour(120); 
     this.appendValueInput("DELAY_TIME", "Number").appendField("Delay" + "\uD83D\uDD51").setCheck("Number"); 
     this.setInputsInline(!0); this.setPreviousStatement(!0, null); 
-    this.setNextStatement(!0, null); this.setTooltip("Delay specific time") 
-    this.sound_delay()
+    this.setNextStatement(!0, null); this.setTooltip("Delay specific time") ;
+    this.sound_control_category() //NOTE: This audio also plays when the block is selected, not only the category
   },mutationToDom: function(){
     this.sound_delay();
     return null   
@@ -41,7 +41,7 @@ Blockly.Blocks.inout_analog_write = { helpUrl: "http://arduino.cc/en/Reference/A
 Blockly.Blocks.inout_analog_read = { helpUrl: "http://arduino.cc/en/Reference/AnalogRead", init: function () { this.setColour(230); this.appendDummyInput().appendField("\uD83D\uDC40 \u219D AnalogRead PIN#").appendField(new Blockly.FieldDropdown(profile["default"].analog), "PIN"); this.setOutput(!0, "Number"); this.setTooltip("Return value between 0 and 1024") } };
 Blockly.Blocks.inout_tone = { helpUrl: "http://www.arduino.cc/en/Reference/Tone", init: function () { this.setColour(230); this.appendDummyInput().appendField("Tone PIN#").appendField(new Blockly.FieldDropdown(profile["default"].digital), "PIN"); this.appendValueInput("NUM", "Number").appendField("frequency").setCheck("Number"); this.setInputsInline(!0); this.setPreviousStatement(!0, null); this.setNextStatement(!0, null); this.setTooltip("Generate audio tones on a pin") } };
 Blockly.Blocks.inout_notone = { helpUrl: "http://www.arduino.cc/en/Reference/NoTone", init: function () { this.setColour(230); this.appendDummyInput().appendField("No tone PIN#").appendField(new Blockly.FieldDropdown(profile["default"].digital), "PIN"); this.setInputsInline(!0); this.setPreviousStatement(!0, null); this.setNextStatement(!0, null); this.setTooltip("Stop generating a tone on a pin") } };
-Blockly.Blocks.inout_highlow = { helpUrl: "http://arduino.cc/en/Reference/Constants", init: function () { this.setColour(230); this.appendDummyInput().appendField(new Blockly.FieldDropdown([["HIGH \uD83D\uDC46", "HIGH"], ["LOW \uD83D\uDC47", "LOW"]]), "BOOL"); this.setOutput(!0, "Boolean"); this.setTooltip("") } };
+Blockly.Blocks.inout_highlow = { helpUrl: "http://arduino.cc/en/Reference/Constants", init: function () { this.setColour(230); this.appendDummyInput().appendField(new Blockly.FieldDropdown([["HIGH \uD83D\uDC46", "HIGH"], ["LOW \uD83D\uDC47", "LOW"]]), "BOOL"); this.setOutput(!0, "Boolean"); this.setTooltip("") } ,mutationToDom: function(){this.sound_high(); return null}};
 Blockly.Blocks.servo_move = {
   helpUrl: "http://www.arduino.cc/playground/ComponentLib/servo", init: function () {
     this.setColour(190); this.appendDummyInput().appendField("Servo").appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/images/product/EMAX%20Servo.jpg", 64, 64)).appendField("PIN#").appendField(new Blockly.FieldDropdown(profile["default"].digital), "PIN"); this.appendValueInput("DEGREE", "Number").setCheck("Number").setAlign(Blockly.ALIGN_RIGHT).appendField("Degree (0~180)"); this.setPreviousStatement(!0,
@@ -55,8 +55,8 @@ Blockly.Blocks.serial_print = {
     this.appendValueInput("CONTENT", "String").appendField("Serial Print \u270D"); 
     this.setPreviousStatement(!0, null); this.setNextStatement(!0, null); 
     this.setTooltip("Prints data to the console/serial port as human-readable ASCII text.") 
-    this.sound_print();
-  } };
+    
+  },mutationToDom: function(){this.sound_print(); return null} };
 // Copyright 2012 Google Inc.  Apache License 2.0
 Blockly.Blocks.colour = {}; Blockly.Blocks.colour.HUE = 20; Blockly.Blocks.colour_picker = { init: function () { this.setHelpUrl(Blockly.Msg.COLOUR_PICKER_HELPURL); this.setColour(Blockly.Blocks.colour.HUE); this.appendDummyInput().appendField(new Blockly.FieldColour("#ff0000"), "COLOUR"); this.setOutput(!0, "Colour"); this.setTooltip(Blockly.Msg.COLOUR_PICKER_TOOLTIP) } };
 Blockly.Blocks.colour_random = { init: function () { this.setHelpUrl(Blockly.Msg.COLOUR_RANDOM_HELPURL); this.setColour(Blockly.Blocks.colour.HUE); this.appendDummyInput().appendField(Blockly.Msg.COLOUR_RANDOM_TITLE); this.setOutput(!0, "Colour"); this.setTooltip(Blockly.Msg.COLOUR_RANDOM_TOOLTIP) } };
@@ -222,7 +222,7 @@ Blockly.Blocks.controls_if = {
     this.appendValueInput("IF0").setCheck("Boolean").appendField(Blockly.Msg.CONTROLS_IF_MSG_IF); 
     this.appendStatementInput("DO0").appendField(Blockly.Msg.CONTROLS_IF_MSG_THEN); 
     this.setPreviousStatement(!0); this.setNextStatement(!0); 
-    this.setMutator(new Blockly.Mutator(["controls_if_elseif", "controls_if_else"])); var a = this; 
+    this.setMutator(new Blockly.Mutator(["controls_if_elseif", "controls_if_else"])); var a = this;   
     this.setTooltip(function () {
       if (a.elseifCount_ || a.elseCount_) {
         if (!a.elseifCount_ &&
