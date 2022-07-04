@@ -1869,26 +1869,28 @@ Blockly.init_ = function (a) {
                 a.loadAudio_([b.pathToMedia+"else.mp3",b.pathToMedia+"else.ogg",b.pathToMedia+"else.wav"],"else")
                 a.loadAudio_([b.pathToMedia+"compare.mp3",b.pathToMedia+"compare.ogg",b.pathToMedia+"compare.wav"],"compare")
                 a.loadAudio_([b.pathToMedia+"logic compare.mp3",b.pathToMedia+"logic compare.ogg",b.pathToMedia+"logic compare.wav"], "logic_compare")
-                //a.loadAudio_([b.pathToMedia+"not.mp3",b.pathToMedia+"not.ogg",b.pathToMedia+"not.wav"], "not")
-                //a.loadAudio_([b.pathToMedia+"null.mp3",b.pathToMedia+"null.ogg",b.pathToMedia+"null.wav"], "null")
+                a.loadAudio_([b.pathToMedia+"not.mp3",b.pathToMedia+"not.ogg",b.pathToMedia+"not.wav"], "not")
+                a.loadAudio_([b.pathToMedia+"null.mp3",b.pathToMedia+"null.ogg",b.pathToMedia+"null.wav"], "null")
 
                 a.loadAudio_([b.pathToMedia+"control category.mp3",b.pathToMedia+"control category.ogg",b.pathToMedia+"control category.wav"],"control_category")
                 a.loadAudio_([b.pathToMedia+"delay.mp3",b.pathToMedia+"delay.ogg",b.pathToMedia+"delay.wav"],"delay")
-                //a.loadAudio_([b.pathToMedia+"counted loop.mp3",b.pathToMedia+"counted loop.ogg",b.pathToMedia+"counted loop.wav"], "counted_loop")
+                a.loadAudio_([b.pathToMedia+"count.mp3",b.pathToMedia+"count.ogg",b.pathToMedia+"count.wav"], "counted_loop")
                 //a.loadAudio_([b.pathToMedia+"repeat.mp3",b.pathToMedia+"repeat.ogg",b.pathToMedia+"repeat.wav"], "repeat")
 
                 a.loadAudio_([b.pathToMedia+"math category.mp3",b.pathToMedia+"math category.ogg",b.pathToMedia+"math category.wav"],"math_category")
                 //a.loadAudio_([b.pathToMedia+"number.mp3",b.pathToMedia+"number.ogg",b.pathToMedia+"number.wav"], "number")
                 //a.loadAudio_([b.pathToMedia+"math operation.mp3",b.pathToMedia+"math operation.ogg",b.pathToMedia+"math operation.wav"], "math_op")
-                //a.loadAudio_([b.pathToMedia+"map value.mp3",b.pathToMedia+"map value.ogg",b.pathToMedia+"map value.wav"], "map_value")
+                a.loadAudio_([b.pathToMedia+"map.mp3",b.pathToMedia+"map.ogg",b.pathToMedia+"map.wav"], "map_value")
 
                 //TEXT
                 a.loadAudio_([b.pathToMedia+"text category.mp3",b.pathToMedia+"text category.ogg",b.pathToMedia+"text category.wav"],"text_category")
 
                 a.loadAudio_([b.pathToMedia+"variables category.mp3",b.pathToMedia+"variables category.ogg",b.pathToMedia+"variables category.wav"],"variables_category")
-                //SET VARIABLE
+                a.loadAudio_([b.pathToMedia+"set_var.mp3",b.pathToMedia+"set_var.ogg",b.pathToMedia+"set_var.wav"],"set_variable")
                 
                 //CATEGORY: FUNCTIONS
+                a.loadAudio_([b.pathToMedia+"create_function.mp3",b.pathToMedia+"create_function.ogg",b.pathToMedia+"create_function.wav"],"create_function")
+                a.loadAudio_([b.pathToMedia+"execute_function.mp3",b.pathToMedia+"execute_function.ogg",b.pathToMedia+"execute_function.wav"],"execute_function")
 
                 //CATEGORY: INPUT/OUTPUT
                 a.loadAudio_([b.pathToMedia+"high.mp3",b.pathToMedia+"high.ogg",b.pathToMedia+"high.wav"],"high")
@@ -1934,27 +1936,28 @@ Blockly.init_ = function (a) {
             Blockly.BlockSvg.prototype.sound_else = function () {this.workspace.playAudio("else")};
             Blockly.BlockSvg.prototype.sound_compare = function () {this.workspace.playAudio("compare")};
             Blockly.BlockSvg.prototype.sound_logic_compare = function () {this.workspace.playAudio("logic_compare")};
-            //Blockly.BlockSvg.prototype.sound_not = function () {this.workspace.playAudio("not")};
-            //Blockly.BlockSvg.prototype.sound_null = function () {this.workspace.playAudio("null")};
+            Blockly.BlockSvg.prototype.sound_not = function () {this.workspace.playAudio("not")};
+            Blockly.BlockSvg.prototype.sound_null = function () {this.workspace.playAudio("null")};
 
             //CONTROL CATEGORY
             Blockly.BlockSvg.prototype.sound_control_category = function () {this.workspace.playAudio("control_category")};
             Blockly.BlockSvg.prototype.sound_delay = function () {this.workspace.playAudio("delay")};
-            //COUNTING LOOP
+            Blockly.BlockSvg.prototype.counted_loop = function () {this.workspace.playAudio("counted_loop")};
             //REPEAT LOOP
 
             Blockly.BlockSvg.prototype.sound_math_category = function () {this.workspace.playAudio("math_category")};
             //NUMBER
             //MATH OPERATION
-            //MAP VALUE
+            Blockly.BlockSvg.prototype.sound_map_value = function () {this.workspace.playAudio("map_value")};
 
             Blockly.BlockSvg.prototype.sound_text_category = function () {this.workspace.playAudio("text_category")};
 
             //CATEGORY: VARIABLES
             Blockly.BlockSvg.prototype.sound_variables_category = function () {this.workspace.playAudio("variables_category")};
-            //SET VARIABLE
+            Blockly.BlockSvg.prototype.sound_set_variable = function () {this.workspace.playAudio("set_variable")};
             
-            //CATEGORY: FUNCTIONS
+            Blockly.BlockSvg.prototype.sound_create_function = function () {this.workspace.playAudio("create_function")};
+            Blockly.BlockSvg.prototype.sound_execute_function = function () {this.workspace.playAudio("execute_function")};
 
             Blockly.BlockSvg.prototype.sound_io_category = function () {this.workspace.playAudio("input_output")};
             Blockly.BlockSvg.prototype.sound_high = function () {this.workspace.playAudio("high")};

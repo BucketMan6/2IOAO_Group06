@@ -97,7 +97,7 @@ Blockly.Blocks.grove_temporature_sensor = { helpUrl: "http://www.seeedstudio.com
 Blockly.Blocks.grove_serial_lcd_print = {
   helpUrl: "http://www.seeedstudio.com/wiki/index.php?title=GROVE_-_Starter_Bundle_V1.0b#Serial_LCD", init: function () {
     this.setColour(190); this.appendDummyInput().appendField("Serial LCD").appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/images/product/Serial%20LCD.jpg", 64, 64)).appendField("PIN#").appendField(new Blockly.FieldDropdown(profile["default"].digital), "PIN"); this.appendValueInput("TEXT", "String").setCheck("String").setAlign(Blockly.ALIGN_RIGHT).appendField("print line1");
-    this.appendValueInput("TEXT2", "String").setCheck("String").setAlign(Blockly.ALIGN_RIGHT).appendField("print line2"); this.appendValueInput("DELAY_TIME", "Number").setCheck("Number").setAlign(Blockly.ALIGN_RIGHT).appendField("Delay"); this.setPreviousStatement(!0, null); this.setNextStatement(!0, null); this.setTooltip("print text on an 16 character by 2 line LCD.")
+    this.appendValueInput("TEXT2", "String").setCheck("String").setAlign(Blockly.ALIGN_RIGHT).appendField("print line2"); this.appendValueInput("DELAY_TIME", "Number").setCheck("Number").setAlign(Blockly.ALIGN_RIGHT).appendField("Delay"); this.setPreviousStatement(!0, null); this.setNextStatement(!0, null); this.setTooltip("print text on an 16 character by 2 line LCD."); this.sound_grove_LCD();
   }
 };
 Blockly.Blocks.grove_serial_lcd_power = {
