@@ -33,22 +33,99 @@ Blockly.Blocks.base = {}; Blockly.Blocks.base_delay = {
   } 
 };
 
-Blockly.Blocks.base_map = { helpUrl: "http://arduino.cc/en/Reference/map", init: function () { this.setColour(230); this.appendValueInput("NUM", "Number").appendField("Map ").setCheck("Number"); this.appendValueInput("DMAX", "Number").appendField("value \u21E8 [0-").setCheck("Number"); this.appendDummyInput().appendField("]"); this.setInputsInline(!0); this.setOutput(!0); this.setTooltip("Re-maps a number from [0-1024] to another.") } };
-Blockly.Blocks.inout_buildin_led = { helpUrl: "http://arduino.cc/en/Reference/DigitalWrite", init: function () { this.setColour(190); this.appendDummyInput().appendField("Build-in LED Stat \uD83D\uDCA1").appendField(new Blockly.FieldDropdown([["HIGH \uD83D\uDC46", "HIGH"], ["LOW \uD83D\uDC47", "LOW"]]), "STAT"); this.setPreviousStatement(!0, null); this.setNextStatement(!0, null); this.setTooltip("light or off the build-in LED") } };
-Blockly.Blocks.inout_digital_write = { helpUrl: "http://arduino.cc/en/Reference/DigitalWrite", init: function () { this.setColour(230); this.appendDummyInput().appendField("\u270D \u21A8 DigitalWrite PIN#").appendField(new Blockly.FieldDropdown(profile["default"].digital), "PIN").appendField("Stat").appendField(new Blockly.FieldDropdown([["HIGH \uD83D\uDC46", "HIGH"], ["LOW \uD83D\uDC47", "LOW"]]), "STAT"); this.setPreviousStatement(!0, null); this.setNextStatement(!0, null); this.setTooltip("Write digital value to a specific Port") } };
-Blockly.Blocks.inout_digital_read = { helpUrl: "http://arduino.cc/en/Reference/DigitalRead", init: function () { this.setColour(230); this.appendDummyInput().appendField("\uD83D\uDC40 \u21A8 DigitalRead PIN#").appendField(new Blockly.FieldDropdown(profile["default"].digital), "PIN"); this.setOutput(!0, "Boolean"); this.setTooltip("") } };
-Blockly.Blocks.inout_analog_write = { helpUrl: "http://arduino.cc/en/Reference/AnalogWrite", init: function () { this.setColour(230); this.appendDummyInput().appendField("\u270D \u219D AnalogWrite PIN#").appendField(new Blockly.FieldDropdown(profile["default"].digital), "PIN"); this.appendValueInput("NUM", "Number").appendField("value").setCheck("Number"); this.setInputsInline(!0); this.setPreviousStatement(!0, null); this.setNextStatement(!0, null); this.setTooltip("Write analog value between 0 and 255 to a specific Port") } };
-Blockly.Blocks.inout_analog_read = { helpUrl: "http://arduino.cc/en/Reference/AnalogRead", init: function () { this.setColour(230); this.appendDummyInput().appendField("\uD83D\uDC40 \u219D AnalogRead PIN#").appendField(new Blockly.FieldDropdown(profile["default"].analog), "PIN"); this.setOutput(!0, "Number"); this.setTooltip("Return value between 0 and 1024") } };
-Blockly.Blocks.inout_tone = { helpUrl: "http://www.arduino.cc/en/Reference/Tone", init: function () { this.setColour(230); this.appendDummyInput().appendField("Tone PIN#").appendField(new Blockly.FieldDropdown(profile["default"].digital), "PIN"); this.appendValueInput("NUM", "Number").appendField("frequency").setCheck("Number"); this.setInputsInline(!0); this.setPreviousStatement(!0, null); this.setNextStatement(!0, null); this.setTooltip("Generate audio tones on a pin") } };
-Blockly.Blocks.inout_notone = { helpUrl: "http://www.arduino.cc/en/Reference/NoTone", init: function () { this.setColour(230); this.appendDummyInput().appendField("No tone PIN#").appendField(new Blockly.FieldDropdown(profile["default"].digital), "PIN"); this.setInputsInline(!0); this.setPreviousStatement(!0, null); this.setNextStatement(!0, null); this.setTooltip("Stop generating a tone on a pin") } };
-Blockly.Blocks.inout_highlow = { helpUrl: "http://arduino.cc/en/Reference/Constants", init: function () { this.setColour(230); this.appendDummyInput().appendField(new Blockly.FieldDropdown([["HIGH \uD83D\uDC46", "HIGH"], ["LOW \uD83D\uDC47", "LOW"]]), "BOOL"); this.setOutput(!0, "Boolean"); this.setTooltip("") } ,mutationToDom: function(){this.sound_high(); return null}};
+// ,mutationToDom: function(){ this.sound_xxxx(); return null}
+
+Blockly.Blocks.base_map = {
+  helpUrl: "http://arduino.cc/en/Reference/map", init: 
+  function () { this.setColour(230); 
+      this.appendValueInput("NUM", "Number").appendField("Map ").setCheck("Number");
+      this.appendValueInput("DMAX", "Number").appendField("value \u21E8 [0-").setCheck("Number");
+      this.appendDummyInput().appendField("]");
+      this.setInputsInline(!0);
+      this.setOutput(!0);
+      this.setTooltip("Re-maps a number from [0-1024] to another.") 
+  },mutationToDom: function(){ this.sound_map_value(); return null} 
+};
+Blockly.Blocks.inout_buildin_led = {
+  helpUrl: "http://arduino.cc/en/Reference/DigitalWrite", init: 
+  function () { this.setColour(190); 
+    this.appendDummyInput().appendField("Build-in LED Stat \uD83D\uDCA1").appendField(new Blockly.FieldDropdown([["HIGH \uD83D\uDC46", "HIGH"], ["LOW \uD83D\uDC47", "LOW"]]), "STAT");
+    this.setPreviousStatement(!0, null); 
+    this.setNextStatement(!0, null); 
+    this.setTooltip("light or off the build-in LED") } 
+};
+Blockly.Blocks.inout_digital_write = {
+   helpUrl: "http://arduino.cc/en/Reference/DigitalWrite", init:
+    function () { this.setColour(230); 
+      this.appendDummyInput().appendField("\u270D \u21A8 DigitalWrite PIN#").appendField(new Blockly.FieldDropdown(profile["default"].digital), "PIN").appendField("Stat").appendField(new Blockly.FieldDropdown([["HIGH \uD83D\uDC46", "HIGH"], ["LOW \uD83D\uDC47", "LOW"]]), "STAT");
+      this.setPreviousStatement(!0, null); 
+      this.setNextStatement(!0, null); 
+      this.setTooltip("Write digital value to a specific Port") } 
+};
+Blockly.Blocks.inout_digital_read = { 
+  helpUrl: "http://arduino.cc/en/Reference/DigitalRead", init: 
+  function () { this.setColour(230); 
+    this.appendDummyInput().appendField("\uD83D\uDC40 \u21A8 DigitalRead PIN#").appendField(new Blockly.FieldDropdown(profile["default"].digital), "PIN"); 
+    this.setOutput(!0, "Boolean"); this.setTooltip("") } 
+};
+Blockly.Blocks.inout_analog_write = { 
+  helpUrl: "http://arduino.cc/en/Reference/AnalogWrite", init: 
+  function () { this.setColour(230); 
+    this.appendDummyInput().appendField("\u270D \u219D AnalogWrite PIN#").appendField(new Blockly.FieldDropdown(profile["default"].digital), "PIN"); 
+    this.appendValueInput("NUM", "Number").appendField("value").setCheck("Number"); this.setInputsInline(!0); 
+    this.setPreviousStatement(!0, null); this.setNextStatement(!0, null); 
+    this.setTooltip("Write analog value between 0 and 255 to a specific Port") } 
+};
+Blockly.Blocks.inout_analog_read = { 
+  helpUrl: "http://arduino.cc/en/Reference/AnalogRead", init: 
+  function () { this.setColour(230); 
+    this.appendDummyInput().appendField("\uD83D\uDC40 \u219D AnalogRead PIN#").appendField(new Blockly.FieldDropdown(profile["default"].analog), "PIN"); 
+    this.setOutput(!0, "Number"); 
+    this.setTooltip("Return value between 0 and 1024") } 
+};
+Blockly.Blocks.inout_tone = { 
+  helpUrl: "http://www.arduino.cc/en/Reference/Tone", init: 
+  function () { this.setColour(230); 
+      this.appendDummyInput().appendField("Tone PIN#").appendField(new Blockly.FieldDropdown(profile["default"].digital), "PIN"); 
+      this.appendValueInput("NUM", "Number").appendField("frequency").setCheck("Number"); 
+      this.setInputsInline(!0); this.setPreviousStatement(!0, null); 
+      this.setNextStatement(!0, null); 
+      this.setTooltip("Generate audio tones on a pin") } 
+};
+Blockly.Blocks.inout_notone = { 
+  helpUrl: "http://www.arduino.cc/en/Reference/NoTone", init: 
+  function () { this.setColour(230); 
+    this.appendDummyInput().appendField("No tone PIN#").appendField(new Blockly.FieldDropdown(profile["default"].digital), "PIN"); 
+    this.setInputsInline(!0); 
+    this.setPreviousStatement(!0, null); 
+    this.setNextStatement(!0, null); this.setTooltip("Stop generating a tone on a pin") } 
+};
+Blockly.Blocks.inout_highlow = { 
+  helpUrl: "http://arduino.cc/en/Reference/Constants", init: 
+  function () { this.setColour(230); 
+    this.appendDummyInput().appendField(new Blockly.FieldDropdown([["HIGH \uD83D\uDC46", "HIGH"], ["LOW \uD83D\uDC47", "LOW"]]), "BOOL"); 
+    this.setOutput(!0, "Boolean"); 
+    this.setTooltip("") 
+  } ,mutationToDom: function(){this.sound_high(); return null}
+};
 Blockly.Blocks.servo_move = {
-  helpUrl: "http://www.arduino.cc/playground/ComponentLib/servo", init: function () {
-    this.setColour(190); this.appendDummyInput().appendField("Servo").appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/images/product/EMAX%20Servo.jpg", 64, 64)).appendField("PIN#").appendField(new Blockly.FieldDropdown(profile["default"].digital), "PIN"); this.appendValueInput("DEGREE", "Number").setCheck("Number").setAlign(Blockly.ALIGN_RIGHT).appendField("Degree (0~180)"); this.setPreviousStatement(!0,
-      null); this.setNextStatement(!0, null); this.setTooltip("move between 0~180 degree")
+  helpUrl: "http://www.arduino.cc/playground/ComponentLib/servo", init: 
+  function () { this.setColour(190); 
+    this.appendDummyInput().appendField("Servo").appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/images/product/EMAX%20Servo.jpg", 64, 64)).appendField("PIN#").appendField(new Blockly.FieldDropdown(profile["default"].digital), "PIN"); 
+    this.appendValueInput("DEGREE", "Number").setCheck("Number").setAlign(Blockly.ALIGN_RIGHT).appendField("Degree (0~180)"); 
+    this.setPreviousStatement(!0,null); 
+    this.setNextStatement(!0, null); 
+    this.setTooltip("move between 0~180 degree")
   }
 };
-Blockly.Blocks.servo_read_degrees = { helpUrl: "http://www.arduino.cc/playground/ComponentLib/servo", init: function () { this.setColour(190); this.appendDummyInput().appendField("Servo").appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/images/product/EMAX%20Servo.jpg", 64, 64)).appendField("PIN#").appendField(new Blockly.FieldDropdown(profile["default"].digital), "PIN"); this.appendDummyInput().setAlign(Blockly.ALIGN_RIGHT).appendField("Read Degrees"); this.setOutput(!0, "Number"); this.setTooltip("return that degree with the last servo move.") } };
+Blockly.Blocks.servo_read_degrees = { 
+  helpUrl: "http://www.arduino.cc/playground/ComponentLib/servo", init: 
+  function () { this.setColour(190); 
+    this.appendDummyInput().appendField("Servo").appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/images/product/EMAX%20Servo.jpg", 64, 64)).appendField("PIN#").appendField(new Blockly.FieldDropdown(profile["default"].digital), "PIN"); 
+    this.appendDummyInput().setAlign(Blockly.ALIGN_RIGHT).appendField("Read Degrees"); 
+    this.setOutput(!0, "Number"); 
+    this.setTooltip("return that degree with the last servo move.") } 
+};
 Blockly.Blocks.serial_print = { 
   helpUrl: "http://www.arduino.cc/en/Serial/Print", init: function () { 
     this.setColour(230); 
@@ -58,12 +135,29 @@ Blockly.Blocks.serial_print = {
     
   },mutationToDom: function(){this.sound_print(); return null} };
 // Copyright 2012 Google Inc.  Apache License 2.0
-Blockly.Blocks.colour = {}; Blockly.Blocks.colour.HUE = 20; Blockly.Blocks.colour_picker = { init: function () { this.setHelpUrl(Blockly.Msg.COLOUR_PICKER_HELPURL); this.setColour(Blockly.Blocks.colour.HUE); this.appendDummyInput().appendField(new Blockly.FieldColour("#ff0000"), "COLOUR"); this.setOutput(!0, "Colour"); this.setTooltip(Blockly.Msg.COLOUR_PICKER_TOOLTIP) } };
-Blockly.Blocks.colour_random = { init: function () { this.setHelpUrl(Blockly.Msg.COLOUR_RANDOM_HELPURL); this.setColour(Blockly.Blocks.colour.HUE); this.appendDummyInput().appendField(Blockly.Msg.COLOUR_RANDOM_TITLE); this.setOutput(!0, "Colour"); this.setTooltip(Blockly.Msg.COLOUR_RANDOM_TOOLTIP) } };
+Blockly.Blocks.colour = {}; 
+Blockly.Blocks.colour.HUE = 20; 
+Blockly.Blocks.colour_picker = { init: 
+  function () { 
+    this.setHelpUrl(Blockly.Msg.COLOUR_PICKER_HELPURL); 
+    this.setColour(Blockly.Blocks.colour.HUE); 
+    this.appendDummyInput().appendField(new Blockly.FieldColour("#ff0000"), "COLOUR"); 
+    this.setOutput(!0, "Colour"); 
+    this.setTooltip(Blockly.Msg.COLOUR_PICKER_TOOLTIP) } 
+};
+Blockly.Blocks.colour_random = { init: 
+  function () { 
+    this.setHelpUrl(Blockly.Msg.COLOUR_RANDOM_HELPURL); 
+    this.setColour(Blockly.Blocks.colour.HUE); 
+    this.appendDummyInput().appendField(Blockly.Msg.COLOUR_RANDOM_TITLE); 
+    this.setOutput(!0, "Colour"); 
+    this.setTooltip(Blockly.Msg.COLOUR_RANDOM_TOOLTIP) } 
+};
 Blockly.Blocks.colour_rgb = {
   init: function () {
     this.setHelpUrl(Blockly.Msg.COLOUR_RGB_HELPURL); this.setColour(Blockly.Blocks.colour.HUE); this.appendValueInput("RED").setCheck("Number").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.COLOUR_RGB_TITLE).appendField(Blockly.Msg.COLOUR_RGB_RED); this.appendValueInput("GREEN").setCheck("Number").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.COLOUR_RGB_GREEN); this.appendValueInput("BLUE").setCheck("Number").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.COLOUR_RGB_BLUE);
-    this.setOutput(!0, "Colour"); this.setTooltip(Blockly.Msg.COLOUR_RGB_TOOLTIP)
+    this.setOutput(!0, "Colour"); 
+    this.setTooltip(Blockly.Msg.COLOUR_RGB_TOOLTIP)
   }
 };
 Blockly.Blocks.colour_blend = {
@@ -74,23 +168,48 @@ Blockly.Blocks.colour_blend = {
 }; Blockly.Blocks.grove = {};
 Blockly.Blocks.grove_led = {
   helpUrl: "http://www.seeedstudio.com/wiki/index.php?title=GROVE_-_Starter_Bundle_V1.0b#LED", init: function () {
-    this.setColour(190); this.appendDummyInput().appendField("LED \uD83D\uDCA1").appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/images/product/groveblue%20white.jpg", 64, 64)).appendField("PIN#").appendField(new Blockly.FieldDropdown(profile["default"].digital), "PIN").appendField("stat").appendField(new Blockly.FieldDropdown([["HIGH \uD83D\uDC46", "HIGH"], ["LOW \uD83D\uDC47", "LOW"]]), "STAT");
+    this.setColour(190); 
+    this.appendDummyInput().appendField("LED \uD83D\uDCA1").appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/images/product/groveblue%20white.jpg", 64, 64)).appendField("PIN#").appendField(new Blockly.FieldDropdown(profile["default"].digital), "PIN").appendField("stat").appendField(new Blockly.FieldDropdown([["HIGH \uD83D\uDC46", "HIGH"], ["LOW \uD83D\uDC47", "LOW"]]), "STAT");
     this.setPreviousStatement(!0, null); this.setNextStatement(!0, null); this.setTooltip("green LED")
   }
 };
-Blockly.Blocks.grove_button = { helpUrl: "http://www.seeedstudio.com/wiki/index.php?title=GROVE_-_Starter_Bundle_V1.0b#Button", init: function () { this.setColour(190); this.appendDummyInput().appendField("Button \uD83D\uDC49 ").appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/images/product/bgpushb1.jpg", 64, 64)).appendField("PIN#").appendField(new Blockly.FieldDropdown(profile["default"].digital), "PIN"); this.setOutput(!0, "Boolean"); this.setTooltip("Basic digital input") } };
-Blockly.Blocks.grove_rotary_angle = { helpUrl: "http://www.seeedstudio.com/wiki/index.php?title=GROVE_-_Starter_Bundle_V1.0b#Potentiometer", init: function () { this.setColour(10); this.appendDummyInput().appendField("Rotary Angle \u2221 \u219D").appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/images/product/GroveRotaryP.jpg", 64, 64)).appendField("PIN#").appendField(new Blockly.FieldDropdown(profile["default"].analog), "PIN"); this.setOutput(!0, "Number"); this.setTooltip("Analog output between 0 and Vcc") } };
-Blockly.Blocks.grove_tilt_switch = { helpUrl: "http://www.seeedstudio.com/wiki/index.php?title=GROVE_-_Starter_Bundle_V1.0b#Tilt_switch", init: function () { this.setColour(190); this.appendDummyInput().appendField("Tilt Switch \u2221 \u21A8").appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/images/product/gbtlt.jpg", 64, 64)).appendField("PIN#").appendField(new Blockly.FieldDropdown(profile["default"].digital), "PIN"); this.setOutput(!0, "Boolean"); this.setTooltip("When the switch is level it is open, and when tilted, the switch closes.") } };
+Blockly.Blocks.grove_button = { 
+  helpUrl: "http://www.seeedstudio.com/wiki/index.php?title=GROVE_-_Starter_Bundle_V1.0b#Button", init: 
+  function () { 
+    this.setColour(190); 
+    this.appendDummyInput().appendField("Button \uD83D\uDC49 ").appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/images/product/bgpushb1.jpg", 64, 64)).appendField("PIN#").appendField(new Blockly.FieldDropdown(profile["default"].digital), "PIN"); 
+    this.setOutput(!0, "Boolean"); 
+    this.setTooltip("Basic digital input") } 
+};
+Blockly.Blocks.grove_rotary_angle = { 
+  helpUrl: "http://www.seeedstudio.com/wiki/index.php?title=GROVE_-_Starter_Bundle_V1.0b#Potentiometer", init: 
+  function () { 
+    this.setColour(10); 
+    this.appendDummyInput().appendField("Rotary Angle \u2221 \u219D").appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/images/product/GroveRotaryP.jpg", 64, 64)).appendField("PIN#").appendField(new Blockly.FieldDropdown(profile["default"].analog), "PIN"); this.setOutput(!0, "Number"); this.setTooltip("Analog output between 0 and Vcc") } 
+};
+Blockly.Blocks.grove_tilt_switch = { 
+  helpUrl: "http://www.seeedstudio.com/wiki/index.php?title=GROVE_-_Starter_Bundle_V1.0b#Tilt_switch", init: 
+  function () { 
+    this.setColour(190); 
+    this.appendDummyInput().appendField("Tilt Switch \u2221 \u21A8").appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/images/product/gbtlt.jpg", 64, 64)).appendField("PIN#").appendField(new Blockly.FieldDropdown(profile["default"].digital), "PIN"); 
+    this.setOutput(!0, "Boolean"); 
+    this.setTooltip("When the switch is level it is open, and when tilted, the switch closes.") } 
+};
 Blockly.Blocks.grove_piezo_buzzer = {
   helpUrl: "http://www.seeedstudio.com/wiki/GROVE_-_Starter_Kit_V1.1b#Grove_.E2.80.93_Buzzer", init: function () {
     this.setColour(190); this.appendDummyInput().appendField("Piezo Buzzer \uD83D\uDD0A").appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/images/107020000%201.jpg", 64, 64)).appendField("PIN#").appendField(new Blockly.FieldDropdown(profile["default"].digital), "PIN").appendField("stat").appendField(new Blockly.FieldDropdown([["HIGH \uD83D\uDC46", "HIGH"],
-    ["LOW \uD83D\uDC47", "LOW"]]), "STAT"); this.setPreviousStatement(!0, null); this.setNextStatement(!0, null); this.setTooltip("Emit a tone when the output is high")
+    ["LOW \uD83D\uDC47", "LOW"]]), "STAT"); 
+    this.setPreviousStatement(!0, null); 
+    this.setNextStatement(!0, null); 
+    this.setTooltip("Emit a tone when the output is high")
   }
 };
 Blockly.Blocks.grove_relay = {
   helpUrl: "http://www.seeedstudio.com/wiki/Grove_-_Relay", init: function () {
-    this.setColour(190); this.appendDummyInput().appendField("Relay \u21A8").appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/images/1030200051.jpg", 64, 64)).appendField("PIN#").appendField(new Blockly.FieldDropdown(profile["default"].digital), "PIN").appendField("stat").appendField(new Blockly.FieldDropdown([["HIGH \uD83D\uDC46", "HIGH"], ["LOW \uD83D\uDC47", "LOW"]]), "STAT"); this.setPreviousStatement(!0,
-      null); this.setNextStatement(!0, null); this.setTooltip("capable of switching a much higher voltages and currents. The maximum voltage and current that can be controlled by this module upto 250V at 10 amps.")
+    this.setColour(190); this.appendDummyInput().appendField("Relay \u21A8").appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/images/1030200051.jpg", 64, 64)).appendField("PIN#").appendField(new Blockly.FieldDropdown(profile["default"].digital), "PIN").appendField("stat").appendField(new Blockly.FieldDropdown([["HIGH \uD83D\uDC46", "HIGH"], ["LOW \uD83D\uDC47", "LOW"]]), "STAT"); 
+    this.setPreviousStatement(!0, null); 
+    this.setNextStatement(!0, null); 
+    this.setTooltip("capable of switching a much higher voltages and currents. The maximum voltage and current that can be controlled by this module upto 250V at 10 amps.")
   }
 };
 Blockly.Blocks.grove_temporature_sensor = { helpUrl: "http://www.seeedstudio.com/wiki/Project_Seven_-_Temperature", init: function () { this.setColour(10); this.appendDummyInput().appendField("Temporature Sensor \uD83C\uDF21").appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/images/101020015%201.jpg", 64, 64)).appendField("PIN#").appendField(new Blockly.FieldDropdown(profile["default"].analog), "PIN"); this.setOutput(!0, "Number"); this.setTooltip("return number of ambient temperature in \u2103") } };
