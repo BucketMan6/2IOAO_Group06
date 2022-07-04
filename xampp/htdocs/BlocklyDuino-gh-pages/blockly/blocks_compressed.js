@@ -20,13 +20,13 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-Blockly.Blocks.base = {}; Blockly.Blocks.base_delay = { 
+Blockly.Blocks.base = {};
+Blockly.Blocks.base_delay = { 
   helpUrl: "http://arduino.cc/en/Reference/delay", init: 
   function () { this.setColour(120); 
     this.appendValueInput("DELAY_TIME", "Number").appendField("Delay" + "\uD83D\uDD51").setCheck("Number"); 
     this.setInputsInline(!0); this.setPreviousStatement(!0, null); 
     this.setNextStatement(!0, null); this.setTooltip("Delay specific time") ;
-    this.sound_control_category() //NOTE: This audio also plays when the block is selected, not only the category
   },mutationToDom: function(){
     this.sound_delay();
     return null   
@@ -34,6 +34,7 @@ Blockly.Blocks.base = {}; Blockly.Blocks.base_delay = {
 };
 
 // ,mutationToDom: function(){ this.sound_xxxx(); return null}
+// TEMPLATE SOUND EXECUTION FUNCTION FOR BLOCKS
 
 Blockly.Blocks.base_map = {
   helpUrl: "http://arduino.cc/en/Reference/map", init: 
@@ -193,7 +194,8 @@ Blockly.Blocks.grove_tilt_switch = {
     this.setColour(190); 
     this.appendDummyInput().appendField("Tilt Switch \u2221 \u21A8").appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/images/product/gbtlt.jpg", 64, 64)).appendField("PIN#").appendField(new Blockly.FieldDropdown(profile["default"].digital), "PIN"); 
     this.setOutput(!0, "Boolean"); 
-    this.setTooltip("When the switch is level it is open, and when tilted, the switch closes.") } 
+    this.setTooltip("When the switch is level it is open, and when tilted, the switch closes.");
+    this.sound_grove_category() } 
 };
 Blockly.Blocks.grove_piezo_buzzer = {
   helpUrl: "http://www.seeedstudio.com/wiki/GROVE_-_Starter_Kit_V1.1b#Grove_.E2.80.93_Buzzer", init: function () {
@@ -231,7 +233,7 @@ Blockly.Blocks.grove_serial_lcd_effect = {
       "LEFT"], ["Scroll Right", "RIGHT"], ["Scroll Auto", "AUTO"]]), "STAT"); this.setPreviousStatement(!0, null); this.setNextStatement(!0, null); this.setTooltip("Turn LCD power on/off")
   }
 };
-Blockly.Blocks.grove_sound_sensor = { helpUrl: "http://www.seeedstudio.com/wiki/Grove_-_Sound_Sensor", init: function () { this.setColour(10); this.appendDummyInput().appendField("Sound Sensor \uD83C\uDFA4").appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/seeed/img/2017-02/fhpNt4QmMYZRtWvB40LIiMrw.jpg", 64, 64)).appendField("PIN#").appendField(new Blockly.FieldDropdown(profile["default"].analog), "PIN"); this.setOutput(!0, "Number"); this.setTooltip("Detect the sound strength of the environment") } };
+Blockly.Blocks.grove_sound_sensor = { helpUrl: "http://www.seeedstudio.com/wiki/Grove_-_Sound_Sensor", init: function () { this.setColour(10); this.appendDummyInput().appendField("Sound Sensor \uD83C\uDFA4").appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/seeed/img/2017-02/fhpNt4QmMYZRtWvB40LIiMrw.jpg", 64, 64)).appendField("PIN#").appendField(new Blockly.FieldDropdown(profile["default"].analog), "PIN"); this.setOutput(!0, "Number"); this.setTooltip("Detect the sound strength of the environment"); this.sound_grove_analog() } };
 Blockly.Blocks.grove_pir_motion_sensor = { helpUrl: "http://www.seeedstudio.com/wiki/Grove_-_PIR_Motion_Sensor", init: function () { this.setColour(190); this.appendDummyInput().appendField("PIR Motion Sensor \uD83D\uDC4B").appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/images/product/Grove%20-%20PIR%20Motion%20Sensor.jpg", 64, 64)).appendField("PIN#").appendField(new Blockly.FieldDropdown(profile["default"].digital), "PIN"); this.setOutput(!0, "Number"); this.setTooltip("When anyone moves in it's detecting range, the sensor outputs HIGH.") } };
 Blockly.Blocks.grove_line_finder = { helpUrl: "http://www.seeedstudio.com/wiki/Grove_-_Line_Finder", init: function () { this.setColour(190); this.appendDummyInput().appendField("Line Finder").appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/seeed/img/2016-09/WcjECS8Y4O8dSFI1TxymsAtg.jpg", 64, 64)).appendField("PIN#").appendField(new Blockly.FieldDropdown(profile["default"].digital), "PIN"); this.setOutput(!0, "Boolean"); this.setTooltip("Output digital signal so the robot can reliably follow a black line on a white background") } };
 Blockly.Blocks.grove_ultrasonic_ranger = {
@@ -243,7 +245,7 @@ Blockly.Blocks.grove_ultrasonic_ranger = {
 Blockly.Blocks.grove_motor_shield = {
   helpUrl: "http://www.seeedstudio.com/wiki/Motor_Shield", init: function () {
     this.setColour(190); this.appendDummyInput().appendField("Motor").appendField(new Blockly.FieldImage("http://wiki.seeedstudio.com/images/4/4d/Smotoshield2.jpg", 64, 64)).appendField(new Blockly.FieldDropdown([["Stop", "stop"], ["Forward", "forward"], ["Right", "right"], ["Left", "left"], ["Backward", "backward"]]), "DIRECTION"); this.setPreviousStatement(!0, null); this.setNextStatement(!0,
-      null); this.setTooltip("Drive two brushed DC motors")
+      null); this.setTooltip("Drive two brushed DC motors"); this.sound_grove_motor();
   }
 };
 Blockly.Blocks.grove_thumb_joystick = {
@@ -415,7 +417,7 @@ Blockly.Blocks.controls_if_else = {
     } this.prevBlocks_[0] = a; 
     this.prevBlocks_[1] = b
   },mutationToDom: function(){
-    this.sound_logic_compare();
+    this.sound_compare();
     return null
   }
   
@@ -428,17 +430,18 @@ Blockly.Blocks.logic_operation = {
         OR: Blockly.Msg.LOGIC_OPERATION_TOOLTIP_OR
       }[a]
     })
-  }
-}; Blockly.Blocks.logic_negate = { init: function () { this.jsonInit({ message0: Blockly.Msg.LOGIC_NEGATE_TITLE, args0: [{ type: "input_value", name: "BOOL", check: "Boolean" }], output: "Boolean", colour: Blockly.Blocks.logic.HUE, tooltip: Blockly.Msg.LOGIC_NEGATE_TOOLTIP, helpUrl: Blockly.Msg.LOGIC_NEGATE_HELPURL }) } };
+  },mutationToDom: function(){ this.sound_logic_compare(); return null}
+}; 
+Blockly.Blocks.logic_negate = { init: function () { this.jsonInit({ message0: Blockly.Msg.LOGIC_NEGATE_TITLE, args0: [{ type: "input_value", name: "BOOL", check: "Boolean" }], output: "Boolean", colour: Blockly.Blocks.logic.HUE, tooltip: Blockly.Msg.LOGIC_NEGATE_TOOLTIP, helpUrl: Blockly.Msg.LOGIC_NEGATE_HELPURL }) },mutationToDom: function(){ this.sound_not(); return null} };
 Blockly.Blocks.logic_boolean = { init: function () { var a = [[Blockly.Msg.LOGIC_BOOLEAN_TRUE, "TRUE"], [Blockly.Msg.LOGIC_BOOLEAN_FALSE, "FALSE"]]; this.setHelpUrl(Blockly.Msg.LOGIC_BOOLEAN_HELPURL); this.setColour(Blockly.Blocks.logic.HUE); this.setOutput(!0, "Boolean"); this.appendDummyInput().appendField(new Blockly.FieldDropdown(a), "BOOL"); this.setTooltip(Blockly.Msg.LOGIC_BOOLEAN_TOOLTIP) } };
-Blockly.Blocks.logic_null = { init: function () { this.setHelpUrl(Blockly.Msg.LOGIC_NULL_HELPURL); this.setColour(Blockly.Blocks.logic.HUE); this.setOutput(!0); this.appendDummyInput().appendField(Blockly.Msg.LOGIC_NULL); this.setTooltip(Blockly.Msg.LOGIC_NULL_TOOLTIP) } };
+Blockly.Blocks.logic_null = { init: function () { this.setHelpUrl(Blockly.Msg.LOGIC_NULL_HELPURL); this.setColour(Blockly.Blocks.logic.HUE); this.setOutput(!0); this.appendDummyInput().appendField(Blockly.Msg.LOGIC_NULL); this.setTooltip(Blockly.Msg.LOGIC_NULL_TOOLTIP) },mutationToDom: function(){ this.sound_null(); return null} };
 Blockly.Blocks.logic_ternary = {
   init: function () { this.setHelpUrl(Blockly.Msg.LOGIC_TERNARY_HELPURL); this.setColour(Blockly.Blocks.logic.HUE); this.appendValueInput("IF").setCheck("Boolean").appendField(Blockly.Msg.LOGIC_TERNARY_CONDITION); this.appendValueInput("THEN").appendField(Blockly.Msg.LOGIC_TERNARY_IF_TRUE); this.appendValueInput("ELSE").appendField(Blockly.Msg.LOGIC_TERNARY_IF_FALSE); this.setOutput(!0); this.setTooltip(Blockly.Msg.LOGIC_TERNARY_TOOLTIP); this.prevParentConnection_ = null }, onchange: function () {
     var a =
       this.getInputTargetBlock("THEN"), b = this.getInputTargetBlock("ELSE"), c = this.outputConnection.targetConnection; if ((a || b) && c) for (var d = 0; 2 > d; d++) { var e = 1 == d ? a : b; e && !e.outputConnection.checkType_(c) && (c === this.prevParentConnection_ ? (this.setParent(null), c.sourceBlock_.bumpNeighbours_()) : (e.setParent(null), e.bumpNeighbours_())) } this.prevParentConnection_ = c
   }
 }; Blockly.Blocks.loops = {}; Blockly.Blocks.loops.HUE = 120; Blockly.Blocks.controls_repeat = { init: function () { this.jsonInit({ message0: Blockly.Msg.CONTROLS_REPEAT_TITLE, args0: [{ type: "field_input", name: "TIMES", text: "10" }], previousStatement: null, nextStatement: null, colour: Blockly.Blocks.loops.HUE, tooltip: Blockly.Msg.CONTROLS_REPEAT_TOOLTIP, helpUrl: Blockly.Msg.CONTROLS_REPEAT_HELPURL }); this.appendStatementInput("DO").appendField(Blockly.Msg.CONTROLS_REPEAT_INPUT_DO); this.getField("TIMES").setChangeHandler(Blockly.FieldTextInput.nonnegativeIntegerValidator) } };
-Blockly.Blocks.controls_repeat_ext = { init: function () { this.jsonInit({ message0: Blockly.Msg.CONTROLS_REPEAT_TITLE, args0: [{ type: "input_value", name: "TIMES", check: "Number" }], previousStatement: null, nextStatement: null, colour: Blockly.Blocks.loops.HUE, tooltip: Blockly.Msg.CONTROLS_REPEAT_TOOLTIP, helpUrl: Blockly.Msg.CONTROLS_REPEAT_HELPURL }); this.appendStatementInput("DO").appendField(Blockly.Msg.CONTROLS_REPEAT_INPUT_DO) } };
+Blockly.Blocks.controls_repeat_ext = { init: function () { this.jsonInit({ message0: Blockly.Msg.CONTROLS_REPEAT_TITLE, args0: [{ type: "input_value", name: "TIMES", check: "Number" }], previousStatement: null, nextStatement: null, colour: Blockly.Blocks.loops.HUE, tooltip: Blockly.Msg.CONTROLS_REPEAT_TOOLTIP, helpUrl: Blockly.Msg.CONTROLS_REPEAT_HELPURL }); this.appendStatementInput("DO").appendField(Blockly.Msg.CONTROLS_REPEAT_INPUT_DO) },mutationToDom: function(){ this.sound_counted_loop(); return null} };
 Blockly.Blocks.controls_whileUntil = {
   init: function () {
     var a = [[Blockly.Msg.CONTROLS_WHILEUNTIL_OPERATOR_WHILE, "WHILE"], [Blockly.Msg.CONTROLS_WHILEUNTIL_OPERATOR_UNTIL, "UNTIL"]]; this.setHelpUrl(Blockly.Msg.CONTROLS_WHILEUNTIL_HELPURL); this.setColour(Blockly.Blocks.loops.HUE); this.appendValueInput("BOOL").setCheck("Boolean").appendField(new Blockly.FieldDropdown(a), "MODE"); this.appendStatementInput("DO").appendField(Blockly.Msg.CONTROLS_WHILEUNTIL_INPUT_DO); this.setPreviousStatement(!0); this.setNextStatement(!0);
@@ -671,12 +674,15 @@ Blockly.Blocks.text_prompt_ext = {
   }
 }; Blockly.Blocks.variables = {}; Blockly.Blocks.variables.HUE = 330;
 Blockly.Blocks.variables_get = {
-  init: function () { this.setHelpUrl(Blockly.Msg.VARIABLES_GET_HELPURL); this.setColour(Blockly.Blocks.variables.HUE); this.appendDummyInput().appendField(new Blockly.FieldVariable(Blockly.Msg.VARIABLES_DEFAULT_NAME), "VAR"); this.setOutput(!0); this.setTooltip(Blockly.Msg.VARIABLES_GET_TOOLTIP); this.contextMenuMsg_ = Blockly.Msg.VARIABLES_GET_CREATE_SET }, getVars: function () { return [this.getFieldValue("VAR")] }, renameVar: function (a, b) {
+  init: function () { this.setHelpUrl(Blockly.Msg.VARIABLES_GET_HELPURL); this.setColour(Blockly.Blocks.variables.HUE); this.appendDummyInput().appendField(new Blockly.FieldVariable(Blockly.Msg.VARIABLES_DEFAULT_NAME), "VAR"); this.setOutput(!0); this.setTooltip(Blockly.Msg.VARIABLES_GET_TOOLTIP); this.contextMenuMsg_ = Blockly.Msg.VARIABLES_GET_CREATE_SET 
+  }, getVars: function () { return [this.getFieldValue("VAR")] }, renameVar: function (a, b) {
     Blockly.Names.equals(a, this.getFieldValue("VAR")) &&
     this.setFieldValue(b, "VAR")
   }, contextMenuType_: "variables_set", customContextMenu: function (a) { var b = { enabled: !0 }, c = this.getFieldValue("VAR"); b.text = this.contextMenuMsg_.replace("%1", c); c = goog.dom.createDom("field", null, c); c.setAttribute("name", "VAR"); c = goog.dom.createDom("block", null, c); c.setAttribute("type", this.contextMenuType_); b.callback = Blockly.ContextMenu.callbackFactory(this, c); a.push(b) }
 };
 Blockly.Blocks.variables_set = {
-  init: function () { this.jsonInit({ message0: Blockly.Msg.VARIABLES_SET, args0: [{ type: "field_variable", name: "VAR", variable: Blockly.Msg.VARIABLES_DEFAULT_NAME }, { type: "input_value", name: "VALUE" }], previousStatement: null, nextStatement: null, colour: Blockly.Blocks.variables.HUE, tooltip: Blockly.Msg.VARIABLES_SET_TOOLTIP, helpUrl: Blockly.Msg.VARIABLES_SET_HELPURL }); this.contextMenuMsg_ = Blockly.Msg.VARIABLES_SET_CREATE_GET }, getVars: function () { return [this.getFieldValue("VAR")] }, renameVar: function (a,
-    b) { Blockly.Names.equals(a, this.getFieldValue("VAR")) && this.setFieldValue(b, "VAR") }, contextMenuType_: "variables_get", customContextMenu: Blockly.Blocks.variables_get.customContextMenu
+  init: function () { 
+    this.jsonInit({ message0: Blockly.Msg.VARIABLES_SET, args0: [{ type: "field_variable", name: "VAR", variable: Blockly.Msg.VARIABLES_DEFAULT_NAME }, { type: "input_value", name: "VALUE" }], previousStatement: null, nextStatement: null, colour: Blockly.Blocks.variables.HUE, tooltip: Blockly.Msg.VARIABLES_SET_TOOLTIP, helpUrl: Blockly.Msg.VARIABLES_SET_HELPURL });
+    this.contextMenuMsg_ = Blockly.Msg.VARIABLES_SET_CREATE_GET }, getVars: function () { return [this.getFieldValue("VAR")] }, renameVar: function (a,
+    b) { Blockly.Names.equals(a, this.getFieldValue("VAR")) && this.setFieldValue(b, "VAR") }, contextMenuType_: "variables_get", customContextMenu: Blockly.Blocks.variables_get.customContextMenu, mutationToDom: function(){ this.sound_set_variable(); return null}
 };
