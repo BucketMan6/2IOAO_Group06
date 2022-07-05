@@ -86,3 +86,18 @@ Copyright (C) 2012~2015 Fred Lin gasolin+blockly@gmail.com
  * You may obtain a copy of the License at
  *
  *   http://www.apache.org/licenses/LICENSE-2.0
+
+### 2IOAO Group 6
+Executed within XAMPP using the command line command
+    cd ...\xampp\htdocs\BlocklyDuino-gh-pages
+
+Server is executed with the command 
+    py -2.7 arduino_web_server.py
+
+The server will then be available at the IP address 127.0.0.1:8080
+
+Added functionality:
+* Increased default zoom to 120% for readablity
+* Added visual symbols to blocks to represent functionality
+* Added sound cues as voiceover to most blocks and categories
+
